@@ -1,0 +1,250 @@
+{% if collection == nil %}
+  <div style="text-align:center; padding:50px;">
+    <h2>This section only works on Collection pages</h2>
+  </div>
+{% else %}
+
+{% paginate collection.products by section.settings.products_per_page %}
+
+<div class="collection-page" style="background: {{ section.settings.bg_color }};">
+
+  <!-- HEADER -->
+  <div class="collection-header">
+    <h1>{{ collection.title }}</h1>
+
+    {% if section.settings.show_description and collection.description != blank %}
+      <div class="collection-description">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="collection-toolbar">
+
+    {% if section.settings.show_count %}
+      <div>{{ collection.products_count }} Products</div>
+    {% endif %}
+
+    {% if section.settings.show_sort %}
+      <form method="get">
+        <select name="sort_by" onchange="this.form.submit()">
+          {% for option in collection.sort_options %}
+            <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
+              {{ option.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+    {% endif %}
+
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="product-grid columns-{{ section.settings.columns }}">
+
+    {% for product in collection.products %}
+      <div class="product-card">
+
+        <a href="{{ product.url }}">
+
+          <div class="product-image">
+            <img 
+              src="{{ product.featured_image | image_url: width: 600 }}" 
+              alt="{{ product.title }}"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <h3>{{ product.title }}</h3>
+
+            <div class="price">
+              {% if product.compare_at_price > product.price %}
+                <span class="sale">{{ product.price | money }}</span>
+                <span class="compare">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span>{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+        </a>
+
+      </div>
+    {% else %}
+      <p>No products found</p>
+    {% endfor %}
+
+  </div>
+
+  <!-- PAGINATION -->
+  {% if paginate.pages > 1 %}
+    <div class="pagination">
+
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}">← Prev</a>
+      {% endif %}
+
+      <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}">Next →</a>
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+</div>
+
+{% endpaginate %}
+
+{% endif %}
+
+<style>
+.collection-page {
+  padding: 40px 20px;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.collection-header h1 {
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.collection-description {
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.collection-toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.product-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.product-grid.columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-grid.columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-grid.columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-card {
+  transition: 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+.product-info {
+  margin-top: 10px;
+}
+
+.product-info h3 {
+  font-size: 15px;
+}
+
+.price {
+  margin-top: 5px;
+}
+
+.price .compare {
+  text-decoration: line-through;
+  opacity: 0.5;
+  margin-left: 6px;
+}
+
+.price .sale {
+  color: red;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Collection Custom Grid",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show Description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Enable Sorting",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show Product Count",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Grid Columns",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Custom Grid"
+    }
+  ]
+}
+{% endschema %}

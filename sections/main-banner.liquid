@@ -1,0 +1,240 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="multi-lookbook-wrapper swiper main-lookbook-slider" style="background-color: {{ section.settings.overall_bg }};">
+  
+  <div class="swiper-wrapper">
+    
+    {% for block in section.blocks %}
+      <div class="lookbook-instance swiper-slide" {{ block.shopify_attributes }}>
+        
+        <div class="lookbook-container">
+          
+          <!-- LEFT -->
+          <div class="lb-col-left">
+            <div class="lb-text">
+              <span class="lb-tag">{{ block.settings.tagline }}</span>
+              <div class="lb-desc">{{ block.settings.description }}</div>
+              <h2 class="lb-title">{{ block.settings.title | newline_to_br }}</h2>
+            </div>
+
+            <div class="lb-img-small lb-float-bottom">
+              {% if block.settings.static_image_1 != blank %}
+                <img src="{{ block.settings.static_image_1 | image_url: width: 600 }}" alt="">
+              {% else %}
+                <div class="placeholder-box"></div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- MIDDLE -->
+          <div class="lb-col-mid">
+            <div class="lb-img-small lb-numbered">
+              <span class="lb-number">{{ forloop.index }}</span>
+              {% if block.settings.static_image_2 != blank %}
+                <img src="{{ block.settings.static_image_2 | image_url: width: 600 }}" alt="">
+              {% else %}
+                <div class="placeholder-box"></div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- RIGHT (MAIN IMAGE NOW FULL STATIC PER SLIDE) -->
+          <div class="lb-col-right">
+            <div class="lb-main-image">
+              {% if block.settings.slide_1 != blank %}
+                <img src="{{ block.settings.slide_1 | image_url: width: 1200 }}" alt="">
+              {% else %}
+                <div class="placeholder-box big">Add Image</div>
+              {% endif %}
+            </div>
+
+            <div class="lb-caption">{{ block.settings.bottom_caption }}</div>
+          </div>
+
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="swiper-pagination"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  function initMainSlider() {
+    new Swiper('.main-lookbook-slider', {
+      loop: true,
+      grabCursor: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.main-lookbook-slider .swiper-pagination',
+        clickable: true
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMainSlider);
+  document.addEventListener('shopify:section:load', initMainSlider);
+</script>
+
+<style>
+  .multi-lookbook-wrapper { padding: 40px 0; }
+
+  .lookbook-instance {
+    padding: 60px 20px;
+  }
+
+  .lookbook-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.7fr 1.8fr;
+    gap: 40px;
+    align-items: start;
+    color: #1a1a1a;
+  }
+
+  .lb-tag {
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+
+  .lb-desc {
+    font-size: 0.9rem;
+    max-width: 260px;
+    margin: 15px 0 40px;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  .lb-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.9;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .lb-img-small img,
+  .lb-main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .lb-main-image img {
+    aspect-ratio: 4/5;
+  }
+
+  .lb-float-bottom {
+    margin-top: 50px;
+    width: 85%;
+  }
+
+  .lb-numbered {
+    position: relative;
+    margin-top: 30%;
+  }
+
+  .lb-number {
+    position: absolute;
+    bottom: -20px;
+    left: -15px;
+    font-weight: 900;
+    font-size: 1.8rem;
+  }
+
+  .lb-caption {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 15px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+  }
+
+  .placeholder-box {
+    background: #d1d1d1;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .placeholder-box.big {
+    aspect-ratio: 4/5;
+    width: 100%;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #000 !important;
+  }
+
+  @media (max-width: 768px) {
+    .lookbook-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .lb-col-mid {
+      display: none;
+    }
+
+    .lb-float-bottom {
+      width: 60%;
+      margin-top: 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Multi-Banner Lookbook",
+  "settings": [
+    {
+      "type": "color",
+      "id": "overall_bg",
+      "label": "Overall Background",
+      "default": "#e5e5e5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner Instance",
+      "settings": [
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "NEW LOOK" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Editorial style banner description.</p>" },
+        { "type": "textarea", "id": "title", "label": "Title (Line breaks)", "default": "BOLD.\nVIBRANT." },
+        { "type": "text", "id": "bottom_caption", "label": "Slider Caption", "default": "SWIPE TO EXPLORE" },
+        { "type": "image_picker", "id": "static_image_1", "label": "Left Small Image" },
+        { "type": "image_picker", "id": "static_image_2", "label": "Middle Small Image" },
+        { "type": "image_picker", "id": "slide_1", "label": "Main Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi-Banner Lookbook",
+      "blocks": [
+        { "type": "banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}

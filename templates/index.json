@@ -1,0 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "main_banner_EJGDzt": {
+      "type": "main-banner",
+      "blocks": {
+        "banner_36Atkf": {
+          "type": "banner",
+          "settings": {
+            "tagline": "NEW LOOK",
+            "description": "<p>Editorial style banner description.</p>",
+            "title": "BOLD.\nVIBRANT.",
+            "bottom_caption": "SWIPE TO EXPLORE",
+            "static_image_1": "shopify://shop_images/56.png",
+            "static_image_2": "shopify://shop_images/55.png",
+            "slide_1": "shopify://shop_images/54.png"
+          }
+        },
+        "banner_ttQiLj": {
+          "type": "banner",
+          "settings": {
+            "tagline": "NEW LOOK",
+            "description": "<p>Editorial style banner description.</p>",
+            "title": "BOLD.\nVIBRANT.",
+            "bottom_caption": "SWIPE TO EXPLORE",
+            "static_image_1": "shopify://shop_images/45.png",
+            "static_image_2": "shopify://shop_images/46.png",
+            "slide_1": "shopify://shop_images/47.png"
+          }
+        },
+        "banner_GhtjxT": {
+          "type": "banner",
+          "settings": {
+            "tagline": "NEW LOOK",
+            "description": "<p>Editorial style banner description.</p>",
+            "title": "BOLD.\nVIBRANT.",
+            "bottom_caption": "SWIPE TO EXPLORE",
+            "static_image_1": "shopify://shop_images/Untitled_design_15.png",
+            "static_image_2": "shopify://shop_images/Untitled_design_18.png",
+            "slide_1": "shopify://shop_images/Untitled_design_14_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "banner_36Atkf",
+        "banner_ttQiLj",
+        "banner_GhtjxT"
+      ],
+      "name": "Editorial Lookbook",
+      "settings": {
+        "overall_bg": "#e5e5e5"
+      }
+    },
+    "featured_collection_f6FP6X": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "products",
+        "products_to_show": 4,
+        "title": "Featured collection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_custom_LTUfFk": {
+      "type": "collection-custom",
+      "disabled": true,
+      "name": "Collection Custom Grid",
+      "settings": {
+        "show_description": true,
+        "show_sort": true,
+        "show_count": true,
+        "products_per_page": 12,
+        "columns": "4",
+        "bg_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "featured_collection",
+    "main_banner_EJGDzt",
+    "featured_collection_f6FP6X",
+    "collection_custom_LTUfFk"
+  ]
+}
