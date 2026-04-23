@@ -139,7 +139,7 @@
         "description": "Write something about your brand or product.",
         "button_text": "Shop Now",
         "button_link": "",
-        "layout": "left"
+        "layout": "right"
       }
     }
   },
