@@ -129,12 +129,25 @@
         "columns": "4",
         "bg_color": "#ffffff"
       }
+    },
+    "image_with_text_custum_8WYEDN": {
+      "type": "image-with-text-custum",
+      "name": "Image with Text Custom",
+      "settings": {
+        "image": "shopify://shop_images/hot-face.png",
+        "heading": "Your Heading Here",
+        "description": "Write something about your brand or product.",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "layout": "left"
+      }
     }
   },
   "order": [
     "featured_collection",
     "main_banner_EJGDzt",
     "featured_collection_f6FP6X",
-    "collection_custom_LTUfFk"
+    "collection_custom_LTUfFk",
+    "image_with_text_custum_8WYEDN"
   ]
 }
