@@ -1,0 +1,129 @@
+
+
+<style>
+.image-text-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 20px;
+}
+
+.image-text-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.image-text-img img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.image-text-content {
+  max-width: 500px;
+}
+
+.image-text-content h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.image-text-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.image-text-content a {
+  display: inline-block;
+  padding: 12px 24px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.image-text-content a:hover {
+  background: #333;
+}
+
+@media(max-width: 768px) {
+  .image-text-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+
+<div class="image-text-section {% if section.settings.layout == 'right' %}reverse{% endif %}">
+  
+  <div class="image-text-img">
+    {% if section.settings.image %}
+      <img src="{{ section.settings.image | image_url: width: 800 }}" alt="image">
+    {% else %}
+      <img src="https://via.placeholder.com/600x400" alt="placeholder">
+    {% endif %}
+  </div>
+
+  <div class="image-text-content">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.description }}</p>
+
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+
+</div>
+{% schema %}
+{
+  "name": "Image with Text Custom",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Heading Here"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Write something about your brand or product."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Image Left" },
+        { "value": "right", "label": "Image Right" }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text Custom"
+    }
+  ]
+}
+{% endschema %}
