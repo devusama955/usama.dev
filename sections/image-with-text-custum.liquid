@@ -1,128 +1,211 @@
-
-
 <style>
-.image-text-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 60px 20px;
+/* ===== SECTION BASE ===== */
+.section-{{ section.id }} {
+  margin-top: {{ section.settings.margin_top }}px;
+  margin-bottom: {{ section.settings.margin_bottom }}px;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  text-align: {{ section.settings.text_align }};
 }
 
-.image-text-section.reverse {
+/* ===== CONTAINER ===== */
+.container-{{ section.id }} {
+  max-width: {{ section.settings.container_width }}px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ===== INNER FLEX ===== */
+.section-{{ section.id }} .inner-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.section-{{ section.id }}.reverse .inner-wrapper {
   flex-direction: row-reverse;
 }
 
-.image-text-img img {
+/* ===== IMAGE ===== */
+.section-{{ section.id }} .image-box img {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
-.image-text-content {
+/* ===== TEXT ===== */
+.section-{{ section.id }} .text-box {
   max-width: 500px;
 }
 
-.image-text-content h2 {
-  font-size: 36px;
-  margin-bottom: 15px;
+/* ===== TABLET ===== */
+@media (max-width: 991px) {
+  .section-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top_tablet }}px;
+    margin-bottom: {{ section.settings.margin_bottom_tablet }}px;
+    padding-top: {{ section.settings.padding_top_tablet }}px;
+    padding-bottom: {{ section.settings.padding_bottom_tablet }}px;
+    text-align: {{ section.settings.text_align_tablet }};
+  }
 }
 
-.image-text-content p {
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #555;
-}
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .section-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top_mobile }}px;
+    margin-bottom: {{ section.settings.margin_bottom_mobile }}px;
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    text-align: {{ section.settings.text_align_mobile }};
+  }
 
-.image-text-content a {
-  display: inline-block;
-  padding: 12px 24px;
-  background: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.image-text-content a:hover {
-  background: #333;
-}
-
-@media(max-width: 768px) {
-  .image-text-section {
+  .section-{{ section.id }} .inner-wrapper {
     flex-direction: column;
-    text-align: center;
   }
 }
 </style>
 
-<div class="image-text-section {% if section.settings.layout == 'right' %}reverse{% endif %}">
-  
-  <div class="image-text-img">
-    {% if section.settings.image %}
-      <img src="{{ section.settings.image | image_url: width: 800 }}" alt="image">
-    {% else %}
-      <img src="https://via.placeholder.com/600x400" alt="placeholder">
-    {% endif %}
-  </div>
+<div class="section-{{ section.id }} {% if section.settings.image_position == 'right' %}reverse{% endif %}">
 
-  <div class="image-text-content">
-    <h2>{{ section.settings.heading }}</h2>
-    <p>{{ section.settings.description }}</p>
+  {% if section.settings.enable_container %}
+    <div class="container-{{ section.id }}">
+  {% endif %}
 
-    {% if section.settings.button_text != blank %}
-      <a href="{{ section.settings.button_link }}">
-        {{ section.settings.button_text }}
-      </a>
-    {% endif %}
-  </div>
+    <div class="inner-wrapper">
+
+      <div class="image-box">
+        {% if section.settings.image %}
+          <img src="{{ section.settings.image | image_url: width: 800 }}">
+        {% endif %}
+      </div>
+
+      <div class="text-box">
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.description }}</p>
+      </div>
+
+    </div>
+
+  {% if section.settings.enable_container %}
+    </div>
+  {% endif %}
 
 </div>
+
 {% schema %}
 {
-  "name": "Image with Text Custom",
+  "name": "Image with Text",
   "settings": [
+
+    { "type": "header", "content": "Content" },
+
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Select Image"
+      "label": "Image"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Your Heading Here"
+      "default": "Your Heading"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Write something about your brand or product."
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Shop Now"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
+      "default": "Write something about your product or brand."
     },
     {
       "type": "select",
-      "id": "layout",
+      "id": "image_position",
       "label": "Image Position",
       "options": [
-        { "value": "left", "label": "Image Left" },
-        { "value": "right", "label": "Image Right" }
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
+    },
+
+    { "type": "header", "content": "Container Settings" },
+
+    {
+      "type": "checkbox",
+      "id": "enable_container",
+      "label": "Enable Container",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container Width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "default": 1200
+    },
+
+    { "type": "header", "content": "Desktop Spacing" },
+
+    { "type": "range", "id": "margin_top", "label": "Margin Top", "min": 0, "max": 150, "step": 5, "default": 50 },
+    { "type": "range", "id": "margin_bottom", "label": "Margin Bottom", "min": 0, "max": 150, "step": 5, "default": 50 },
+    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 150, "step": 5, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 150, "step": 5, "default": 40 },
+
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "Tablet Spacing" },
+
+    { "type": "range", "id": "margin_top_tablet", "label": "Margin Top", "min": 0, "max": 150, "step": 5, "default": 40 },
+    { "type": "range", "id": "margin_bottom_tablet", "label": "Margin Bottom", "min": 0, "max": 150, "step": 5, "default": 40 },
+    { "type": "range", "id": "padding_top_tablet", "label": "Padding Top", "min": 0, "max": 150, "step": 5, "default": 30 },
+    { "type": "range", "id": "padding_bottom_tablet", "label": "Padding Bottom", "min": 0, "max": 150, "step": 5, "default": 30 },
+
+    {
+      "type": "select",
+      "id": "text_align_tablet",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "header", "content": "Mobile Spacing" },
+
+    { "type": "range", "id": "margin_top_mobile", "label": "Margin Top", "min": 0, "max": 150, "step": 5, "default": 30 },
+    { "type": "range", "id": "margin_bottom_mobile", "label": "Margin Bottom", "min": 0, "max": 150, "step": 5, "default": 30 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding Top", "min": 0, "max": 150, "step": 5, "default": 20 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding Bottom", "min": 0, "max": 150, "step": 5, "default": 20 },
+
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
     }
+
   ],
   "presets": [
     {
-      "name": "Image with Text Custom"
+      "name": "Image with Text"
     }
   ]
 }
