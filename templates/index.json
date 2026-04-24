@@ -159,6 +159,57 @@
         "padding_bottom_mobile": 20,
         "text_align_mobile": "left"
       }
+    },
+    "testimonials_4REJ4A": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_4LAziE": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/grateful_1.png",
+            "name": "John Doe",
+            "role": "Customer",
+            "text": "This product is amazing! Highly recommended.",
+            "rating": 5
+          }
+        },
+        "testimonial_EtWtPw": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/geateful_3.png",
+            "name": "John Doe",
+            "role": "Customer",
+            "text": "This product is amazing! Highly recommended.",
+            "rating": 5
+          }
+        },
+        "testimonial_TntW8k": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/grateful_2.png",
+            "name": "John Doe",
+            "role": "Customer",
+            "text": "This product is amazing! Highly recommended.",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_4LAziE",
+        "testimonial_EtWtPw",
+        "testimonial_TntW8k"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "enable_container": true,
+        "container_width": 1200,
+        "columns": 3,
+        "text_align": "center",
+        "margin_top": 50,
+        "margin_bottom": 50,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -166,6 +217,7 @@
     "main_banner_EJGDzt",
     "featured_collection_f6FP6X",
     "collection_custom_LTUfFk",
-    "image_with_text_custum_8WYEDN"
+    "image_with_text_custum_8WYEDN",
+    "testimonials_4REJ4A"
   ]
 }
