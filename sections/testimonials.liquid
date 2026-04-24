@@ -1,0 +1,223 @@
+<style>
+.section-{{ section.id }} {
+  margin-top: {{ section.settings.margin_top }}px;
+  margin-bottom: {{ section.settings.margin_bottom }}px;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  text-align: {{ section.settings.text_align }};
+}
+
+/* Container */
+.container-{{ section.id }} {
+  max-width: {{ section.settings.container_width }}px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Grid */
+.testimonials-grid-{{ section.id }} {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+  gap: 25px;
+}
+
+/* Card */
+.testimonial-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* Image */
+.testimonial-img img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Name */
+.testimonial-name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Role */
+.testimonial-role {
+  font-size: 13px;
+  color: gray;
+}
+
+/* Stars */
+.stars {
+  color: #f5a623;
+  margin: 10px 0;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .testimonials-grid-{{ section.id }} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .testimonials-grid-{{ section.id }} {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="section-{{ section.id }}">
+
+  {% if section.settings.enable_container %}
+    <div class="container-{{ section.id }}">
+  {% endif %}
+
+    <div class="testimonials-grid-{{ section.id }}">
+
+      {% for block in section.blocks %}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+
+          {% if block.settings.image %}
+            <div class="testimonial-img">
+              <img src="{{ block.settings.image | image_url: width: 100 }}">
+            </div>
+          {% endif %}
+
+          <div class="stars">
+            {% for i in (1..block.settings.rating) %}
+              ★
+            {% endfor %}
+          </div>
+
+          <p>{{ block.settings.text }}</p>
+
+          <div class="testimonial-name">
+            {{ block.settings.name }}
+          </div>
+
+          <div class="testimonial-role">
+            {{ block.settings.role }}
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+  {% if section.settings.enable_container %}
+    </div>
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+
+    { "type": "header", "content": "Layout Settings" },
+
+    {
+      "type": "checkbox",
+      "id": "enable_container",
+      "label": "Enable Container",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container Width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "default": 1200
+    },
+
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (Desktop)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    },
+
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "header", "content": "Spacing" },
+
+    { "type": "range", "id": "margin_top", "label": "Margin Top", "min": 0, "max": 150, "step": 5, "default": 50 },
+    { "type": "range", "id": "margin_bottom", "label": "Margin Bottom", "min": 0, "max": 150, "step": 5, "default": 50 },
+    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 150, "step": 5, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 150, "step": 5, "default": 40 }
+
+  ],
+
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Customer"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "This product is amazing! Highly recommended."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
