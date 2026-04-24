@@ -1,5 +1,4 @@
 <style>
-/* ===== SECTION BASE ===== */
 .section-{{ section.id }} {
   margin-top: {{ section.settings.margin_top }}px;
   margin-bottom: {{ section.settings.margin_bottom }}px;
@@ -7,16 +6,12 @@
   padding-bottom: {{ section.settings.padding_bottom }}px;
   text-align: {{ section.settings.text_align }};
 }
-
-/* ===== CONTAINER ===== */
 .container-{{ section.id }} {
   max-width: {{ section.settings.container_width }}px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
 }
-
-/* ===== INNER FLEX ===== */
 .section-{{ section.id }} .inner-wrapper {
   display: flex;
   align-items: center;
@@ -27,18 +22,14 @@
   flex-direction: row-reverse;
 }
 
-/* ===== IMAGE ===== */
 .section-{{ section.id }} .image-box img {
   width: 100%;
   border-radius: 10px;
 }
 
-/* ===== TEXT ===== */
 .section-{{ section.id }} .text-box {
   max-width: 500px;
 }
-
-/* ===== TABLET ===== */
 @media (max-width: 991px) {
   .section-{{ section.id }} {
     margin-top: {{ section.settings.margin_top_tablet }}px;
@@ -48,8 +39,6 @@
     text-align: {{ section.settings.text_align_tablet }};
   }
 }
-
-/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .section-{{ section.id }} {
     margin-top: {{ section.settings.margin_top_mobile }}px;
