@@ -1,17 +1,25 @@
 <style>
+/* ===== SECTION BASE ===== */
 .section-{{ section.id }} {
+  position: relative;
+  overflow: hidden;
+
   margin-top: {{ section.settings.margin_top }}px;
   margin-bottom: {{ section.settings.margin_bottom }}px;
   padding-top: {{ section.settings.padding_top }}px;
   padding-bottom: {{ section.settings.padding_bottom }}px;
   text-align: {{ section.settings.text_align }};
 }
+
+/* ===== CONTAINER ===== */
 .container-{{ section.id }} {
   max-width: {{ section.settings.container_width }}px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* ===== INNER FLEX ===== */
 .section-{{ section.id }} .inner-wrapper {
   display: flex;
   align-items: center;
@@ -22,14 +30,41 @@
   flex-direction: row-reverse;
 }
 
+/* ===== IMAGE ===== */
 .section-{{ section.id }} .image-box img {
   width: 100%;
   border-radius: 10px;
 }
 
+/* ===== TEXT ===== */
 .section-{{ section.id }} .text-box {
   max-width: 500px;
 }
+
+/* ===== OVERLAY ===== */
+.overlay-{{ section.id }} {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: {{ section.settings.overlay_color }};
+  opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  z-index: 1;
+
+  {% unless section.settings.enable_overlay %}
+    display: none;
+  {% endunless %}
+}
+
+/* Keep content above overlay */
+.section-{{ section.id }} .container-{{ section.id }},
+.section-{{ section.id }} .inner-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== TABLET ===== */
 @media (max-width: 991px) {
   .section-{{ section.id }} {
     margin-top: {{ section.settings.margin_top_tablet }}px;
@@ -39,6 +74,8 @@
     text-align: {{ section.settings.text_align_tablet }};
   }
 }
+
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .section-{{ section.id }} {
     margin-top: {{ section.settings.margin_top_mobile }}px;
@@ -55,6 +92,9 @@
 </style>
 
 <div class="section-{{ section.id }} {% if section.settings.image_position == 'right' %}reverse{% endif %}">
+
+  <!-- Overlay -->
+  <div class="overlay-{{ section.id }}"></div>
 
   {% if section.settings.enable_container %}
     <div class="container-{{ section.id }}">
@@ -83,7 +123,7 @@
 
 {% schema %}
 {
-  "name": "Image with Text",
+  "name": "Image with Text PRO",
   "settings": [
 
     { "type": "header", "content": "Content" },
@@ -132,6 +172,30 @@
       "max": 1600,
       "step": 50,
       "default": 1200
+    },
+
+    { "type": "header", "content": "Overlay Settings" },
+
+    {
+      "type": "checkbox",
+      "id": "enable_overlay",
+      "label": "Enable Overlay",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30
     },
 
     { "type": "header", "content": "Desktop Spacing" },
@@ -194,7 +258,7 @@
   ],
   "presets": [
     {
-      "name": "Image with Text"
+      "name": "Image with Text PRO"
     }
   ]
 }
