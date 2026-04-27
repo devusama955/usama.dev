@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+.sync-slider {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.sync-text, .sync-image {
+  width: 50%;
+}
+
+.sync-text h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.sync-text p {
+  font-size: 16px;
+  color: #555;
+}
+
+.sync-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+</style>
+
+<div class="sync-slider page-width">
+  
+  <!-- TEXT SLIDER -->
+  <div class="sync-text">
+    <div class="swiper textSwiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <h2>{{ block.settings.heading }}</h2>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE SLIDER -->
+  <div class="sync-image">
+    <div class="swiper imageSwiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | image_url }}" alt="">
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const textSwiper = new Swiper(".textSwiper", {
+    slidesPerView: 1,
+    effect: "fade",
+    fadeEffect: { crossFade: true },
+  });
+
+  const imageSwiper = new Swiper(".imageSwiper", {
+    slidesPerView: 1,
+  });
+
+  // SYNC BOTH
+  textSwiper.controller.control = imageSwiper;
+  imageSwiper.controller.control = textSwiper;
+</script>
+
+{% schema %}
+{
+  "name": "Text Image Sync Slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Your Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Your description here"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Image Sync Slider"
+    }
+  ]
+}
+{% endschema %}
