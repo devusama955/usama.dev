@@ -7,21 +7,20 @@
   text-align: {{ section.settings.text_align }};
 }
 
-/* Container */
 .container-{{ section.id }} {
   max-width: {{ section.settings.container_width }}px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Grid */
+/* GRID */
 .testimonials-grid-{{ section.id }} {
   display: grid;
   grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
   gap: 25px;
 }
 
-/* Card */
+/* CARD */
 .testimonial-card {
   background: #fff;
   padding: 25px;
@@ -29,7 +28,7 @@
   box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
 
-/* Image */
+/* IMAGE */
 .testimonial-img img {
   width: 60px;
   height: 60px;
@@ -37,22 +36,14 @@
   object-fit: cover;
 }
 
-/* Name */
-.testimonial-name {
-  font-weight: bold;
-  margin-top: 10px;
-}
+/* TEXT */
+.testimonial-name { font-weight: bold; margin-top: 10px; }
+.testimonial-role { font-size: 13px; color: gray; }
+.stars { color: #f5a623; margin: 10px 0; }
 
-/* Role */
-.testimonial-role {
-  font-size: 13px;
-  color: gray;
-}
-
-/* Stars */
-.stars {
-  color: #f5a623;
-  margin: 10px 0;
+/* SWIPER FIX */
+.swiper {
+  padding-bottom: 40px;
 }
 
 /* Tablet */
@@ -70,47 +61,101 @@
 }
 </style>
 
+<!-- SWIPER CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <div class="section-{{ section.id }}">
 
-  {% if section.settings.enable_container %}
-    <div class="container-{{ section.id }}">
-  {% endif %}
+{% if section.settings.enable_container %}
+<div class="container-{{ section.id }}">
+{% endif %}
 
-    <div class="testimonials-grid-{{ section.id }}">
+{% if section.settings.enable_slider %}
 
-      {% for block in section.blocks %}
-        <div class="testimonial-card" {{ block.shopify_attributes }}>
+<!-- SLIDER -->
+<div class="swiper testimonial-slider-{{ section.id }}">
+  <div class="swiper-wrapper">
 
-          {% if block.settings.image %}
-            <div class="testimonial-img">
-              <img src="{{ block.settings.image | image_url: width: 100 }}">
-            </div>
-          {% endif %}
+    {% for block in section.blocks %}
+    <div class="swiper-slide">
+      <div class="testimonial-card">
 
-          <div class="stars">
-            {% for i in (1..block.settings.rating) %}
-              ★
-            {% endfor %}
-          </div>
-
-          <p>{{ block.settings.text }}</p>
-
-          <div class="testimonial-name">
-            {{ block.settings.name }}
-          </div>
-
-          <div class="testimonial-role">
-            {{ block.settings.role }}
-          </div>
-
+        {% if block.settings.image %}
+        <div class="testimonial-img">
+          <img src="{{ block.settings.image | image_url: width: 100 }}">
         </div>
-      {% endfor %}
+        {% endif %}
 
+        <div class="stars">
+          {% for i in (1..block.settings.rating) %}★{% endfor %}
+        </div>
+
+        <p>{{ block.settings.text }}</p>
+
+        <div class="testimonial-name">{{ block.settings.name }}</div>
+        <div class="testimonial-role">{{ block.settings.role }}</div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="swiper-pagination"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  new Swiper('.testimonial-slider-{{ section.id }}', {
+    loop: true,
+    autoplay: {{ section.settings.autoplay | json }},
+    slidesPerView: 1,
+    spaceBetween: 20,
+    pagination: {
+      el: '.testimonial-slider-{{ section.id }} .swiper-pagination',
+      clickable: true
+    },
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: {{ section.settings.columns }} }
+    }
+  });
+});
+</script>
+
+{% else %}
+
+<!-- GRID -->
+<div class="testimonials-grid-{{ section.id }}">
+  {% for block in section.blocks %}
+  <div class="testimonial-card">
+
+    {% if block.settings.image %}
+    <div class="testimonial-img">
+      <img src="{{ block.settings.image | image_url: width: 100 }}">
+    </div>
+    {% endif %}
+
+    <div class="stars">
+      {% for i in (1..block.settings.rating) %}★{% endfor %}
     </div>
 
-  {% if section.settings.enable_container %}
-    </div>
-  {% endif %}
+    <p>{{ block.settings.text }}</p>
+
+    <div class="testimonial-name">{{ block.settings.name }}</div>
+    <div class="testimonial-role">{{ block.settings.role }}</div>
+
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+
+{% if section.settings.enable_container %}
+</div>
+{% endif %}
 
 </div>
 
@@ -119,38 +164,18 @@
   "name": "Testimonials",
   "settings": [
 
-    { "type": "header", "content": "Layout Settings" },
+    { "type": "checkbox", "id": "enable_container", "label": "Enable Container", "default": true },
+    { "type": "range", "id": "container_width", "label": "Container Width", "min": 800, "max": 1600, "step": 50, "default": 1200 },
 
-    {
-      "type": "checkbox",
-      "id": "enable_container",
-      "label": "Enable Container",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "container_width",
-      "label": "Container Width",
-      "min": 800,
-      "max": 1600,
-      "step": 50,
-      "default": 1200
-    },
+    { "type": "checkbox", "id": "enable_slider", "label": "Enable Slider", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto Play", "default": true },
 
-    {
-      "type": "range",
-      "id": "columns",
-      "label": "Columns (Desktop)",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "default": 3
-    },
+    { "type": "range", "id": "columns", "label": "Columns", "min": 1, "max": 3, "step": 1, "default": 3 },
 
     {
       "type": "select",
       "id": "text_align",
-      "label": "Text Alignment",
+      "label": "Text Align",
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
@@ -158,8 +183,6 @@
       ],
       "default": "center"
     },
-
-    { "type": "header", "content": "Spacing" },
 
     { "type": "range", "id": "margin_top", "label": "Margin Top", "min": 0, "max": 150, "step": 5, "default": 50 },
     { "type": "range", "id": "margin_bottom", "label": "Margin Bottom", "min": 0, "max": 150, "step": 5, "default": 50 },
@@ -173,38 +196,11 @@
       "type": "testimonial",
       "name": "Testimonial",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Customer Image"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "John Doe"
-        },
-        {
-          "type": "text",
-          "id": "role",
-          "label": "Role",
-          "default": "Customer"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Testimonial Text",
-          "default": "This product is amazing! Highly recommended."
-        },
-        {
-          "type": "range",
-          "id": "rating",
-          "label": "Rating",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "default": 5
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "John Doe" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Customer" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Amazing product!" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "default": 5 }
       ]
     }
   ],
