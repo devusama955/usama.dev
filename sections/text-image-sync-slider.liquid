@@ -7,6 +7,11 @@
   gap: 40px;
 }
 
+/* REVERSE LAYOUT */
+.sync-slider.reverse {
+  flex-direction: row-reverse;
+}
+
 .sync-text, .sync-image {
   width: 50%;
 }
@@ -25,14 +30,16 @@
   width: 100%;
   border-radius: 10px;
 }
+
+/* MOBILE */
 @media (max-width: 911px) {
-    .sync-slider {
-     flex-description: column;
-}
+  .sync-slider {
+    flex-direction: column;
+  }
 }
 </style>
 
-<div class="sync-slider page-width">
+<div class="sync-slider page-width {% if section.settings.layout == 'reverse' %}reverse{% endif %}">
   
   <!-- TEXT SLIDER -->
   <div class="sync-text">
@@ -86,7 +93,24 @@
 {% schema %}
 {
   "name": "Text Image Sync Slider",
-  "settings": [],
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Text Left / Image Right"
+        },
+        {
+          "value": "reverse",
+          "label": "Image Left / Text Right"
+        }
+      ]
+    }
+  ],
   "blocks": [
     {
       "type": "slide",
