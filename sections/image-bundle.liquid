@@ -117,7 +117,7 @@
           {%- assign bundle_image = product.featured_image -%}
         {%- endif -%}
         
-        <div 
+<div
           class="image-bundle__item"
           data-product-handle="{{ product.handle }}"
           data-product-url="{{ product.url }}"
@@ -125,15 +125,14 @@
           {{ block.shopify_attributes }}
         >
           {%- if bundle_image != blank -%}
-            {{
-              bundle_image
-              | image_url: width: 1200
-              | image_tag:
-                loading: 'lazy',
-                sizes: '(min-width: 1200px) {{ 100 | divided_by: section.settings.columns_desktop }}vw, 100vw',
-                widths: '200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200',
-                class: 'image-bundle__image'
-            }}
+            <img
+              src="{{ bundle_image | image_url: width: 600 }}"
+              alt="{{ bundle_image.alt | escape }}"
+              loading="lazy"
+              width="600"
+              height="{{ 600 | divided_by: bundle_image.aspect_ratio | round }}"
+              class="image-bundle__image"
+            >
           {%- else -%}
             {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg image-bundle__image' }}
           {%- endif -%}
@@ -193,16 +192,16 @@
         </button>
         
         <div class="quick-view-modal__content-info">
-          <div class="quick-view-modal__product">
-            <div class="quick-view-modal__product-image">
+<div class="quick-view-modal__product">
+          <div class="quick-view-modal__product-image">
               {%- if product.featured_image != blank -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 800
-                  | image_tag:
-                    sizes: '(min-width: 800px) 400px, 100vw',
-                    widths: '200, 400, 600, 800'
-                }}
+                <img
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  loading="lazy"
+                  width="400"
+                  height="{{ 400 | divided_by: product.featured_image.aspect_ratio | round }}"
+                >
               {%- else -%}
                 {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
