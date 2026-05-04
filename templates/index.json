@@ -511,7 +511,7 @@
       "name": "Tabs",
       "settings": {
         "caption": "",
-        "heading": "Tabs",
+        "heading": "",
         "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "image_second",
