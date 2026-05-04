@@ -467,6 +467,23 @@
     "tabs_Ugrnbr": {
       "type": "tabs",
       "blocks": {
+        "tab_AjmgNP": {
+          "type": "tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Content",
+            "content": "<p>Smile</p>"
+          }
+        },
+        "tab_RNDnpW": {
+          "type": "tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Image",
+            "content": "",
+            "image": "shopify://shop_images/47_d1723237-8dcc-4b4d-8b76-0cb5a70dbe1b.png"
+          }
+        },
         "tab_HUiFx9": {
           "type": "tab",
           "settings": {
@@ -486,6 +503,8 @@
         }
       },
       "block_order": [
+        "tab_AjmgNP",
+        "tab_RNDnpW",
         "tab_HUiFx9",
         "tab_MheA9X"
       ],
