@@ -1,0 +1,279 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'tabs.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient isolate page-width section-{{ section.id }}-padding">
+  {%- if section.settings.heading != blank -%}
+    <div class="tabs__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="text-align: {{ section.settings.heading_alignment }};">
+      {%- if section.settings.caption != blank -%}
+        <p class="caption-with-letter-spacing">{{ section.settings.caption | escape }}</p>
+      {%- endif -%}
+      <h2 class="tabs__heading inline-richtext {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+  
+  <div class="tabs" data-tabs-id="{{ section.id }}">
+    <div class="tabs__nav-wrapper">
+      <ul class="tabs__nav list-unstyled" role="tablist">
+        {%- for block in section.blocks -%}
+          <li role="presentation">
+            <button
+              class="tabs__nav-button{% if forloop.first %} tabs__nav-button--active{% endif %}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="TabContent-{{ block.id }}-{{ section.id }}"
+              id="TabButton-{{ block.id }}-{{ section.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.icon != blank -%}
+                {% render 'icon-accordion', icon: block.settings.icon %}
+              {%- endif -%}
+              {{ block.settings.heading | escape }}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    
+    <div class="tabs__content-wrapper">
+      {%- for block in section.blocks -%}
+        <div
+          id="TabContent-{{ block.id }}-{{ section.id }}"
+          class="tabs__content{% if forloop.first == false %} tabs__content--hidden{% endif %}"
+          role="tabpanel"
+          tabindex="0"
+          aria-labelledby="TabButton-{{ block.id }}-{{ section.id }}"
+        >
+          <div class="tabs__pane page-width">
+            <div class="grid grid--1-col grid--2-col-tablet{% if section.settings.layout == 'image_first' %} grid--2-col-reverse-tablet{% endif %}">
+              {%- if block.settings.image != blank -%}
+                <div class="grid__item tabs__media">
+                  <img
+                    srcset="{%- if block.settings.image.width >= 1000 -%}{{ block.settings.image | img_url: '1000x' }} 1000w,{%- endif -%}
+                            {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                            {%- if block.settings.image.width >= 500 -%}{{ block.settings.image | img_url: '500x' }} 500w,{%- endif -%}
+                            {%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                            {{ block.settings.image | img_url: '300x' }} 300w"
+                    sizes="{% if section.settings.layout == 'image_first' %}(min-width: 990px) 50vw, 100vw{% else %}50vw{% endif %}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    class="tabs__media-image"
+                  >
+                </div>
+              {%- endif -%}
+              <div class="grid__item tabs__text rte">
+                {{ block.settings.content }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Tabs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Tabs",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Heading alignment"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_second",
+          "label": "Text first"
+        },
+        {
+          "value": "image_first",
+          "label": "Image first"
+        }
+      ],
+      "default": "image_second",
+      "label": "Desktop content position"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "No icon"
+            },
+            {
+              "value": "apple",
+              "label": "Apple"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "check_mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ],
+          "default": "none",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Tab {{ forloop.index }}",
+          "label": "Tab heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "heading": "Content",
+            "content": "<p>Tab content goes here. Add rich text, lists, or other content.</p>"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "heading": "Image",
+            "image": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
