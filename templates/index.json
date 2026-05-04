@@ -135,8 +135,8 @@
       "name": "Image with Text Custom",
       "settings": {
         "image": "shopify://shop_images/hot-face.png",
-        "heading": "Your Heading Here",
-        "description": "Write something about your brand or product.",
+        "heading": "Cooking Up Change: How UnitedUs transformed Prept's identity to inspire a new generation through food",
+        "description": "The Brighton studio has rebranded the Table Talk Foundation to help it grow from its Sussex roots into a nationwide movement, inspiring young people to connect with cooking and embrace healthier, happ...",
         "image_position": "left",
         "enable_container": true,
         "container_width": 1200,
@@ -163,6 +163,26 @@
     "testimonials_4REJ4A": {
       "type": "testimonials",
       "blocks": {
+        "testimonial_3Mz38r": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/grateful_1.png",
+            "name": "John Doe",
+            "role": "Customer",
+            "text": "Amazing product!",
+            "rating": 5
+          }
+        },
+        "testimonial_rAGrKj": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/chief.png",
+            "name": "John Doe",
+            "role": "Customer",
+            "text": "Amazing product!",
+            "rating": 5
+          }
+        },
         "testimonial_4LAziE": {
           "type": "testimonial",
           "settings": {
@@ -195,6 +215,8 @@
         }
       },
       "block_order": [
+        "testimonial_3Mz38r",
+        "testimonial_rAGrKj",
         "testimonial_4LAziE",
         "testimonial_EtWtPw",
         "testimonial_TntW8k"
@@ -203,12 +225,280 @@
       "settings": {
         "enable_container": true,
         "container_width": 1200,
+        "enable_slider": true,
+        "autoplay": false,
         "columns": 3,
         "text_align": "center",
-        "margin_top": 50,
-        "margin_bottom": 50,
-        "padding_top": 40,
+        "margin_top": 80,
+        "margin_bottom": 80,
+        "padding_top": 80,
         "padding_bottom": 40
+      }
+    },
+    "text_image_sync_slider_Ggdn4R": {
+      "type": "text-image-sync-slider",
+      "blocks": {
+        "slide_dKpygX": {
+          "type": "slide",
+          "settings": {
+            "heading": "The front is good",
+            "description": "Clean and minimal front design with a bold identity. Made to give a strong first impression while keeping it simple and stylish.",
+            "image": "shopify://shop_images/53.png"
+          }
+        },
+        "slide_3Cy4RJ": {
+          "type": "slide",
+          "settings": {
+            "heading": "The back of life",
+            "description": "The back features a statement design that adds character and depth. It completes the look with a modern and eye-catching finish.",
+            "image": "shopify://shop_images/52.png"
+          }
+        },
+        "slide_9NqVqn": {
+          "type": "slide",
+          "settings": {
+            "heading": "left Pose",
+            "description": "Subtle detailing on the left side adds a unique touch without overpowering the design. A refined element for a premium feel.",
+            "image": "shopify://shop_images/50.png"
+          }
+        },
+        "slide_6R4pMr": {
+          "type": "slide",
+          "settings": {
+            "heading": "The Right Pose",
+            "description": "Balanced design on the right side that enhances overall symmetry. Clean and thoughtfully placed for a complete look.",
+            "image": "shopify://shop_images/49.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_dKpygX",
+        "slide_3Cy4RJ",
+        "slide_9NqVqn",
+        "slide_6R4pMr"
+      ],
+      "name": "Text Image Sync Slider",
+      "settings": {
+        "layout": "normal"
+      }
+    },
+    "faq_XCNXyV": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_KJ7dBt": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What materials are used in your products?",
+            "icon": "question_mark",
+            "answer": "<p>Our products are crafted using high-quality fabrics designed for comfort, durability, and style. Each item is carefully selected to ensure a premium feel and long-lasting wear.</p>"
+          }
+        },
+        "faq_item_hU6mDt": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I choose the right size?",
+            "icon": "question_mark",
+            "answer": "<p>We recommend checking our size guide before placing your order. If you're between sizes, go for the larger size for a more comfortable fit.</p>"
+          }
+        },
+        "faq_item_JGEkqi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer cash on delivery (COD)?",
+            "icon": "question_mark",
+            "answer": "<p>Yes, we offer Cash on Delivery (COD) for customers across Pakistan for a smooth and reliable shopping experience.</p>"
+          }
+        },
+        "faq_item_Qe4GYD": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take?",
+            "icon": "question_mark",
+            "answer": "<p>Orders are usually delivered within 3–5 working days, depending on your location.</p>"
+          }
+        },
+        "faq_item_mnqPt8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return or exchange policy?",
+            "icon": "question_mark",
+            "answer": "<p>We offer easy exchanges in case of size issues or defects. You can request an exchange within 7 days of receiving your order.</p>"
+          }
+        },
+        "faq_item_qQRPJa": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you restock sold-out items?",
+            "icon": "question_mark",
+            "answer": "<p>Some of our popular items are restocked, but many are limited edition. We recommend grabbing your favorite pieces before they sell out.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_KJ7dBt",
+        "faq_item_hU6mDt",
+        "faq_item_JGEkqi",
+        "faq_item_Qe4GYD",
+        "faq_item_mnqPt8",
+        "faq_item_qQRPJa"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "color_scheme": "background-1",
+        "background_color": "#ffffff",
+        "gradient_start_color": "",
+        "gradient_end_color": "",
+        "heading": "Frequently Asked Questions",
+        "heading_font_size": 3.3,
+        "heading_color": "",
+        "heading_size": "h0",
+        "question_font_size": 1.3,
+        "question_text_color": "#000000",
+        "answer_font_size": 1.3,
+        "answer_text_color": "#666666",
+        "icon_color": "#194ee1",
+        "layout": "stack",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_bundle_78gWfY": {
+      "type": "image-bundle",
+      "blocks": {
+        "product_jdeEVt": {
+          "type": "product",
+          "settings": {
+            "product": "mahroun-t-shirt",
+            "image": "shopify://shop_images/Untitleddesign_9.png"
+          }
+        },
+        "product_bkABhA": {
+          "type": "product",
+          "settings": {
+            "product": "mahroun-t-shirt",
+            "image": "shopify://shop_images/54_403a02ab-9cb0-4245-bd46-527a99c25698.png"
+          }
+        },
+        "product_gLFQq3": {
+          "type": "product",
+          "settings": {
+            "product": "half-leaf-t-shirt-mahrun",
+            "image": "shopify://shop_images/55_beef4073-ce06-4703-a9d8-aedf06f7ac64.png"
+          }
+        },
+        "product_aVJAg9": {
+          "type": "product",
+          "settings": {
+            "product": "classic-polo-shirt",
+            "image": "shopify://shop_images/53.png"
+          }
+        }
+      },
+      "block_order": [
+        "product_jdeEVt",
+        "product_bkABhA",
+        "product_gLFQq3",
+        "product_aVJAg9"
+      ],
+      "name": "Image Bundle",
+      "settings": {
+        "heading": "Image Bundle",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "columns_mobile": 2,
+        "gap": 8,
+        "hover_scale": 105,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "advanced_video_gAjbmt": {
+      "type": "advanced-video",
+      "blocks": {
+        "video_xCnkNW": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/4975733-hd_1080_1920_25fps.mp4",
+            "video_url": "",
+            "cover_image": "shopify://shop_images/51.png",
+            "enable_loop": true,
+            "autoplay": false,
+            "title": "",
+            "description": "",
+            "product": ""
+          }
+        },
+        "video_dFwkzp": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "enable_loop": true,
+            "autoplay": false,
+            "title": "",
+            "description": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_xCnkNW",
+        "video_dFwkzp"
+      ],
+      "name": "Advanced Video",
+      "settings": {
+        "heading": "Our Videos",
+        "heading_size": "h1",
+        "layout": "grid",
+        "columns_desktop": 2,
+        "columns_mobile": 1,
+        "gap": 16,
+        "carousel_slides": 3,
+        "text_align": "flex-start",
+        "text_position": "center",
+        "overlay_opacity": 40,
+        "title_size": 32,
+        "description_size": 16,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "tabs_Ugrnbr": {
+      "type": "tabs",
+      "blocks": {
+        "tab_HUiFx9": {
+          "type": "tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Content",
+            "content": "<p>Hello World</p>"
+          }
+        },
+        "tab_MheA9X": {
+          "type": "tab",
+          "settings": {
+            "icon": "none",
+            "heading": "Image",
+            "content": "",
+            "image": "shopify://shop_images/53.png"
+          }
+        }
+      },
+      "block_order": [
+        "tab_HUiFx9",
+        "tab_MheA9X"
+      ],
+      "name": "Tabs",
+      "settings": {
+        "caption": "",
+        "heading": "Tabs",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "image_second",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
@@ -218,6 +508,11 @@
     "featured_collection_f6FP6X",
     "collection_custom_LTUfFk",
     "image_with_text_custum_8WYEDN",
-    "testimonials_4REJ4A"
+    "testimonials_4REJ4A",
+    "text_image_sync_slider_Ggdn4R",
+    "faq_XCNXyV",
+    "image_bundle_78gWfY",
+    "advanced_video_gAjbmt",
+    "tabs_Ugrnbr"
   ]
 }
