@@ -575,6 +575,7 @@
         "buy_buttons_QAyFTq",
         "share_kmikFN"
       ],
+      "disabled": true,
       "name": "t:sections.featured-product.presets.name",
       "settings": {
         "product": "formal-shirt-mahrun-shirt",
@@ -587,6 +588,47 @@
         "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_TtBQXD": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_f6dLUX": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "t-shirt"
+          }
+        },
+        "featured_collection_H7dmLE": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "vel-vestibulum-elit"
+          }
+        },
+        "featured_collection_x9WJpT": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "products"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_f6dLUX",
+        "featured_collection_H7dmLE",
+        "featured_collection_x9WJpT"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -604,6 +646,7 @@
     "image_bundle_78gWfY",
     "advanced_video_gAjbmt",
     "tabs_Ugrnbr",
-    "featured_product_ffgCWt"
+    "featured_product_ffgCWt",
+    "collection_list_TtBQXD"
   ]
 }
