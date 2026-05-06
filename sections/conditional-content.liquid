@@ -38,13 +38,9 @@
     {% for block in section.blocks %}
       
       {% assign show_block = true %}
-
-      {%- comment -%} Checkbox condition {%- endcomment -%}
       {% if block.settings.enable_block == false %}
         {% assign show_block = false %}
       {% endif %}
-
-      {%- comment -%} Date condition {%- endcomment -%}
       {% if block.settings.start_date != blank %}
         {% assign today = 'now' | date: '%s' %}
         {% assign start = block.settings.start_date | date: '%s' %}
@@ -52,33 +48,26 @@
           {% assign show_block = false %}
         {% endif %}
       {% endif %}
-
       {% if show_block %}
         <div class="conditional-block" {{ block.shopify_attributes }}>
           
           {% if block.settings.image %}
             <img src="{{ block.settings.image | image_url: width: 800 }}" alt="">
           {% endif %}
-
           {% if block.settings.heading != blank %}
             <h2>{{ block.settings.heading }}</h2>
           {% endif %}
-
           {% if block.settings.text != blank %}
             <p>{{ block.settings.text }}</p>
           {% endif %}
-
           {% if block.settings.button_label != blank %}
             <a href="{{ block.settings.button_link }}">
               {{ block.settings.button_label }}
             </a>
           {% endif %}
-
         </div>
       {% endif %}
-
     {% endfor %}
-
   </div>
 </div>
 {% schema %}
