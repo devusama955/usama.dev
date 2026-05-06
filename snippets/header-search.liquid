@@ -7,7 +7,6 @@
   Usage:
   {% render 'header-search', input_id: 'My-Id'%}
 {% endcomment %}
-
 <details-modal class="header__search">
   <details>
     <summary
@@ -79,12 +78,10 @@
               </span>
             </button>
           </div>
-
           {%- if settings.predictive_search_enabled -%}
             <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
               {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
             </div>
-
             <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
           {%- endif -%}
         </form>
