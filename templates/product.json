@@ -65,6 +65,13 @@
             "text": "{{ product.metafields.custom.test_object.value.heading.value }}",
             "text_style": "body"
           }
+        },
+        "text_iExVGg": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.test_object.value.description.value }}",
+            "text_style": "body"
+          }
         }
       },
       "block_order": [
@@ -77,7 +84,8 @@
         "buy_buttons",
         "description",
         "share",
-        "text_htmcQe"
+        "text_htmcQe",
+        "text_iExVGg"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -97,6 +105,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "heading_size": "h2",
@@ -124,6 +133,7 @@
       "block_order": [
         "opinew-reviews-widget"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
