@@ -1,0 +1,53 @@
+<div class="test-object-section page-width">
+  {%- if product.metafields.custom.test_object_link.value != blank -%}
+    {%- assign my_object = product.metafields.custom.test_object_link.value -%}
+    
+    <div class="test-object-card" style="padding: 20px; border: 1px solid #ececec; border-radius: 8px;">
+      {% if my_object.heading %}
+        <h2 class="h1">{{ my_object.heading }}</h2>
+      {% endif %}
+
+      {% if my_object.discraptions %}
+        <div class="rte">
+          {{ my_object.discraptions | newline_to_br }}
+        </div>
+      {% endif %}
+
+      {% if my_object.image %}
+        <div class="test-object-media" style="margin-top: 20px;">
+          {{ my_object.image | image_url: width: 800 | image_tag: 
+            loading: 'lazy', 
+            class: 'test-object-img',
+            style: 'max-width: 100%; height: auto; border-radius: 4px;' 
+          }}
+        </div>
+      {% endif %}
+    </div>
+  {%- else -%}
+    {%- if request.design_mode -%}
+      <div style="padding: 20px; background: #f4f4f4; border: 1px dashed #ccc;">
+        Assign a Metaobject to this product to see the content here.
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Test Object Display",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Setup Instructions",
+      "info": "This section pulls data from the Product Metafield that references your Metaobject."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Test Object Display"
+    }
+  ]
+}
+{% endschema %}
