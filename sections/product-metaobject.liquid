@@ -1,0 +1,57 @@
+{% comment %}
+Sections: sections/product-metaobject.liquid
+Yeh section product metafield ke andar saved metaobject ko show karega.
+{% endcomment %}
+
+{% assign custom_info = product.metafields.custom.product_info.value %}
+
+{% if custom_info != blank %}
+<section class="product-metaobject-section page-width">
+  <div class="metaobject-wrapper">
+
+    {% if custom_info.image != blank %}
+      <div class="metaobject-image">
+        <img
+          src="{{ custom_info.image | image_url: width: 1200 }}"
+          alt="{{ custom_info.heading | escape }}"
+          width=""
+          height=""
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+
+    <div class="metaobject-content">
+
+      {% if custom_info.heading != blank %}
+        <h2>{{ custom_info.heading }}</h2>
+      {% endif %}
+
+      {% if custom_info.description != blank %}
+        <div class="description">
+          {{ custom_info.description }}
+        </div>
+      {% endif %}
+
+      {% if custom_info.button_link != blank %}
+        <a href="{{ custom_info.button_link }}" class="meta-btn">
+          {{ custom_info.button_text }}
+        </a>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Metaobject",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Metaobject"
+    }
+  ]
+}
+{% endschema %}
