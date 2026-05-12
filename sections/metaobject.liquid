@@ -2,24 +2,22 @@
 
 <div class="best-fabric-wrapper">
 
+  {{ fabrics | json }}
+
   {% if fabrics != blank %}
 
     {% for fabric in fabrics %}
+      
       <div class="fabric-item">
-        
-        {% if fabric.title != blank %}
-          <h3>{{ fabric.title }}</h3>
-        {% endif %}
 
-        {% if fabric.description != blank %}
-          <p>{{ fabric.description }}</p>
-        {% endif %}
+        <h3>{{ fabric.system.title }}</h3>
+
+        <p>{{ fabric.description.value }}</p>
 
       </div>
+
     {% endfor %}
 
-  {% else %}
-    <p>No fabrics found.</p>
   {% endif %}
 
 </div>
@@ -27,12 +25,10 @@
 {% schema %}
 {
   "name": "Best Fabric",
-  "tag": "section",
-  "class": "best-fabric-section",
   "settings": [],
   "presets": [
     {
-      "name": "test meta object"
+      "name": "Test Metaobject"
     }
   ]
 }
