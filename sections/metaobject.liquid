@@ -1,0 +1,25 @@
+{% assign fabrics = product.metafields.custom.best_fabric.value %}
+
+{% for fabric in fabrics %}
+  <div class="fabric-item">
+    <h3>{{ fabric.title }}</h3>
+    <p>{{ fabric.description }}</p>
+  </div>
+{% endfor %}
+{% schema %}
+    {
+    "name": "Best Fabric",
+    "settings": [
+        {
+        "type": "product",
+        "id": "product",
+        "label": "Select Product"
+        }
+    ],
+    "presets": [
+        {
+        "name": "Best Fabric"
+        }
+    ]
+    }
+{% endschema %}
